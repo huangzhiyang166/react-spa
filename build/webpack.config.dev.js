@@ -3,6 +3,9 @@ const path = require("path");
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.config.base');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const getEnvVar = require("./getEnvVar");
+const envVar = getEnvVar("development");
+const version = require("../package.json").version;
 module.exports = merge(baseWebpackConfig, {
     mode: 'development',
     output : {
@@ -58,5 +61,14 @@ module.exports = merge(baseWebpackConfig, {
                 ]
             }
         ]
-    }
+    },
+    plugins : [
+        new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: '"development"',
+                ...envVar,
+                version : '"' + version + '"'
+			}
+		})
+    ]
 });

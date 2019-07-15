@@ -2,9 +2,11 @@ const path = require('path');
 const DIST_PATH = path.resolve(__dirname, '../dist');
 const SRC_PATH = path.resolve(__dirname, '../src');
 const PUBLIC_PATH = path.resolve(__dirname, '../public');
+const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const getViewConfig = require("./getViewConfig");
+
 const config = getViewConfig();
 const entry = config.reduce((prev,current) => {
     const {entry,chunkName} = current;
@@ -21,7 +23,10 @@ const plugins = config.map((item) => {
     if(title) option[title] = title;
     return new HtmlWebPackPlugin(option);
 })
+
+
 module.exports = {
+	mode: 'development',
     entry,
     output: {
         path: DIST_PATH,
@@ -57,6 +62,21 @@ module.exports = {
     },
     plugins : [
         ...plugins,
-        new CleanWebpackPlugin()
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname,"../public"),
+                to: DIST_PATH,
+                toType: 'dir',
+                ignore: [
+                    "DS_Store","index.html"
+                ]
+            }
+		]),
+		// new webpack.DefinePlugin({
+		// 	'process.env': {
+		// 		// NODE_ENV: process.env.NODE_ENV==="production" ? '"production"' : '"development"',
+		// 		NODE_ENV: '"' + JSON.stringify(process.env.NODE_ENV) + '"'
+		// 	}
+		// })
     ]
 };

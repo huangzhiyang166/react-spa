@@ -1,7 +1,12 @@
+const webpack = require("webpack");
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.config.base');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const getEnvVar = require("./getEnvVar");
+const envVar = getEnvVar("production");
+const version = require("../package.json").version;
 module.exports = merge(baseWebpackConfig, {
     mode: 'production',
     optimization: {
@@ -73,8 +78,10 @@ module.exports = merge(baseWebpackConfig, {
 		]
 	},
 	plugins : [
+		new CleanWebpackPlugin(),
 		new MiniCssExtractPlugin({
 			filename: "css/[name].[contenthash:8].css",
+			chunkFilename: "css/[name].[contenthash:8].css",
 		}),
 		new OptimizeCSSAssetsPlugin({
 			assetNameRegExp: /\.css$/g,
@@ -89,6 +96,13 @@ module.exports = merge(baseWebpackConfig, {
 				}]
 			},
 			canPrint: true
+		}),
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: '"production"',
+				...envVar,
+				version : '"' + version + '"'
+			}
 		})
 	]
 });
