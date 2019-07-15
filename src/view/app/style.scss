@@ -1,0 +1,11 @@
+.osfd{
+    position: relative;
+    .btn{
+        display: inline;
+        transform: scale(2)
+    }
+}
+.title{
+    color: $yellow;
+    background: url(~@/assets/image/icon_dzf.png) no-repeat 0 0;
+}

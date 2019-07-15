@@ -1,5 +1,7 @@
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.config.base');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = merge(baseWebpackConfig, {
     mode: 'production',
     optimization: {
@@ -29,8 +31,64 @@ module.exports = merge(baseWebpackConfig, {
 					test: /[\\/]node_modules[\\/]/,
 					priority: 10,
 					reuseExistingChunk: true // 可设置是否重用该chunk
-				}
+				},
 			}
 		},
-    }
+	},
+	module : {
+		rules : [
+			{
+                test : /\.css$/,
+                use:[
+						MiniCssExtractPlugin.loader,
+                        { loader: "css-loader" },
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                sourceMap: false
+                            }
+                        },
+                ]
+			},
+			{
+                test : /\.scss$/,
+                use:[
+						MiniCssExtractPlugin.loader,
+                        { loader: "css-loader" },
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                sourceMap: false
+                            }
+                        },
+						{ 	
+							loader: "sass-loader",
+							options: {
+								data: '@import "../src/assets/styles/style.scss";',
+								includePaths:[__dirname, 'src']
+							},
+						}
+                ]
+            }
+		]
+	},
+	plugins : [
+		new MiniCssExtractPlugin({
+			filename: "css/[name].[contenthash:8].css",
+		}),
+		new OptimizeCSSAssetsPlugin({
+			assetNameRegExp: /\.css$/g,
+			cssProcessor: require('cssnano'),
+			// cssProcessorOptions: cssnanoOptions,
+			cssProcessorPluginOptions: {
+				preset: ['default', {
+					discardComments: {
+						removeAll: true,
+					},
+					normalizeUnicode: false
+				}]
+			},
+			canPrint: true
+		})
+	]
 });

@@ -30,17 +30,30 @@ module.exports = {
     },
     resolve: {
         alias: {
-            "@" : SRC_PATH
+            "@" : SRC_PATH,  //指向"src"目录
         },
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-              loader: 'babel-loader'
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|svg)/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        outputPath: 'image/', // 图片输出的路径
+                        limit: 10,
+                        name : "[name].[hash:8].[ext]",
+                    }
+                }
             }
-        }]
+        ],
     },
     plugins : [
         ...plugins,

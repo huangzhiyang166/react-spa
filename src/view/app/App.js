@@ -4,7 +4,7 @@ import { hot } from "react-hot-loader";
 let App = (props) => {
     return (
         <Provider store={props.store}>
-            <p>看我实现热更新</p>
+            <p className="title">看我实现热更新!!!</p>
         </Provider>
     );
 };
