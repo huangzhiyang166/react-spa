@@ -4,8 +4,8 @@ const baseWebpackConfig = require('./webpack.config.base');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
-
-module.exports = merge(baseWebpackConfig("production"), {
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const config = merge(baseWebpackConfig("production"),{
     mode: 'production',
     optimization: {
         splitChunks: {
@@ -96,4 +96,10 @@ module.exports = merge(baseWebpackConfig("production"), {
 			canPrint: true
 		}),
 	]
-});
+})
+
+if(process.env.npm_config_report){ // 打包可视化
+	config.plugins.push(new BundleAnalyzerPlugin())
+}
+
+module.exports = config;
