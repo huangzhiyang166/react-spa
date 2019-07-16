@@ -4,10 +4,8 @@ const baseWebpackConfig = require('./webpack.config.base');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
-const getEnvVar = require("./getEnvVar");
-const envVar = getEnvVar("production");
-const version = require("../package.json").version;
-module.exports = merge(baseWebpackConfig, {
+
+module.exports = merge(baseWebpackConfig("production"), {
     mode: 'production',
     optimization: {
         splitChunks: {
@@ -24,7 +22,7 @@ module.exports = merge(baseWebpackConfig, {
 				common: {
 					chunks: 'all',
 					name: `common`,
-					test : /[\\/]src[\\/]util[\\/]|[\\/]src[\\/]component[\\/]|[\\/]src[\\/]lib[\\/]/,
+					test : /[\\/]src[\\/]util[\\/]|[\\/]src[\\/]component[\\/]|[\\/]src[\\/]lib[\\/]|[\\/]src[\\/]assets[\\/]/,
 					minSize : 10,
 					priority: 9,
 					reuseExistingChunk: true // 可设置是否重用该chunk
@@ -97,12 +95,5 @@ module.exports = merge(baseWebpackConfig, {
 			},
 			canPrint: true
 		}),
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: '"production"',
-				...envVar,
-				version : '"' + version + '"'
-			}
-		})
 	]
 });

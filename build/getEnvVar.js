@@ -55,11 +55,11 @@ const getEnvVar = (env="development") => {
 
     //异步版本不能用
     return Promise.all([
-        readTextLine(path.resolve(__dirname,"../.env")).catch(e=>e),
-        readTextLine(path.resolve(__dirname,"../.env.development")).catch(e=>e),
-        readTextLine(path.resolve(__dirname,"../.env.development.local")).catch(e=>e),
-        readTextLine(path.resolve(__dirname,"../.env.production")).catch(e=>e),
-        readTextLine(path.resolve(__dirname,"../.env.production.local")).catch(e=>e),
+        readTextLine(path.resolve(__dirname,"../.env")),
+        readTextLine(path.resolve(__dirname,"../.env.development")),
+        readTextLine(path.resolve(__dirname,"../.env.development.local")),
+        readTextLine(path.resolve(__dirname,"../.env.production")),
+        readTextLine(path.resolve(__dirname,"../.env.production.local")),
     ]).then((data) => {
         return data.reduce((prev,cur) => {
             return Object.assign(prev,cur.reduce((prev,cur) => {

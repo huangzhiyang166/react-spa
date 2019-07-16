@@ -1,12 +1,13 @@
 {
   "name": "react-spa",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.js", 
+  "title" : "票付通",
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --progress --config build/webpack.config.dev.js --open chrome",
     "dev": "yarn run start",
-    "build": "webpack --config build/webpack.config.prod.js"
+    "build": "webpack --progress --config build/webpack.config.prod.js"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
