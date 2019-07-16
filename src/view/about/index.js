@@ -1,4 +1,3 @@
-import "@/assets/styles/aaa.scss";
 import React from "react";
 import ReactDom from "react-dom";
 import {getToday} from "@/util";
