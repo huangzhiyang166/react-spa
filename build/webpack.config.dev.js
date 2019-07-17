@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.config.base');
+const proxy = require("../proxy")
 module.exports = merge(baseWebpackConfig("development"), {
     mode: 'development',
     output : {
@@ -19,7 +20,7 @@ module.exports = merge(baseWebpackConfig("development"), {
         https: false,
         noInfo: true,
         open: false,
-        proxy: {}
+        proxy
     },
     module : {
         rules : [
