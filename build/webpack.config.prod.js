@@ -9,13 +9,13 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const config = merge(baseWebpackConfig("production"),{
     mode: 'production',
     optimization: {
-		minimizer : [
-			new UglifyJsPlugin({
-				cache: true,
-				parallel: true,
-				sourceMap: false
-			}),
-		],
+		// minimizer : [
+		// 	new UglifyJsPlugin({
+		// 		cache: true,
+		// 		parallel: true,
+		// 		sourceMap: false
+		// 	}),
+		// ],
         splitChunks: {
             // （默认值3）入口点上的最大并行请求数
 			minChunks: 1,
