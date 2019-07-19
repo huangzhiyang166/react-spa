@@ -28,6 +28,11 @@ module.exports = (env="development") => {
         resolve: {
             alias: {
                 "@" : SRC_PATH,  //指向"src"目录
+                ...config.reduce((prev,cur) => {
+                    const {chunkName} = cur;
+                    prev["@"+chunkName] = path.resolve(SRC_PATH,`view/${chunkName}`);
+                    return prev;
+                },{}),
             },
         },
         module: {
