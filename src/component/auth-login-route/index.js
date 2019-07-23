@@ -6,7 +6,7 @@ export default function AuthLoginRoute({component:Component,render,...rest}){
         render(){
             return(
                 <Route {...rest} render={(props) => {
-                    if(this.props.isLogin){
+                    if(props.location.pathname=="/login" || !rest.requireAuth || this.props.isLogin){
 						if(Component) return <Component {...props} {...rest}/>;
 						if(render) return render({...props,...rest});
 					}

@@ -4,7 +4,7 @@ export default function(){
             name : "test"
         },
         userInfo : {
-            isLogin : true
+            isLogin : false
         }
     }
 }
