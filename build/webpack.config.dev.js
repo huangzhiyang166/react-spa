@@ -2,7 +2,13 @@ const webpack = require("webpack");
 const path = require("path");
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.config.base');
-const proxy = require("../proxy")
+const proxy = require("../proxy");
+const getEnvVar = require("./getEnvVar");
+const envVar = getEnvVar("development");
+let port = "9090";
+if(envVar && envVar.REACT_APP_PORT){
+    port = envVar.REACT_APP_PORT.replace(/"/g,"")
+}
 module.exports = merge(baseWebpackConfig("development"), {
     mode: 'development',
     output : {
@@ -12,7 +18,7 @@ module.exports = merge(baseWebpackConfig("development"), {
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
-        port: '9090',
+        port,
         contentBase: path.join(__dirname, '../public'),
         compress: true,
         historyApiFallback: true,

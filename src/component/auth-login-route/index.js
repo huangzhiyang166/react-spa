@@ -21,7 +21,7 @@ export default function AuthLoginRoute({component:Component,render,...rest}){
         }
     }
     const AuthLoginRouteStore = connect((state) => ({
-        isLogin : state.userInfo.isLogin
+        isLogin : state.app.isLogin
     }))(AuthLoginRoute);
     return <AuthLoginRouteStore/>
 }

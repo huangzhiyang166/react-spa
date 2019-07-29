@@ -1,5 +1,5 @@
 import React from "react";
-const Home = (props) => (<h3>Home</h3>);
+import Home from "@app/page/home"
 const Detail = (props) => {
 	return(
 		<div className="page detail">
