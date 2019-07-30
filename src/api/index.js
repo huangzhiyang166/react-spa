@@ -4,7 +4,7 @@ const axios = createRequest();
 
 export function login(account,pwd,yzm=""){
 	return axios.post("dlogin.php",{
-        passport : account,
+    	passport : account,
         password : md5(pwd),
         yzm
 	})

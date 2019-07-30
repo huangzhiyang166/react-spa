@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
+import { connect } from "react-redux";
+import {login} from "@app/store/app";
 
 const Modal = () => new Promise((resolve,reject) => {
 
@@ -40,12 +42,13 @@ const Modal = () => new Promise((resolve,reject) => {
 })
 
 
-export default function Home(){
+
+
+function Home(props){
     function onClick(e){
-        Modal().then(({close}) => {
-            console.log("aaaa");
-            close();
-        })
+        props.dispatch(login()).then((res) => {
+            console.log("finish",res);
+        });
     }
     return(
         <div onClick={onClick}>
@@ -54,6 +57,8 @@ export default function Home(){
     )
 }
 
+
+export default connect((state)=>state)(Home)
 
 
 
