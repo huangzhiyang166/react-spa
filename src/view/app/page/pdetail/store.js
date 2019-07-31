@@ -1,27 +1,19 @@
 import * as api from "@/api";
-//state
 export const initState = {
-    isLogin : true,
-    appInfo : {},
-    userInfo : {},
-    refer : ""
+    list : []
 }
-
-//actionType
 export const LOGIN_LOADING = "login_login";
 export const LOGIN_FAIL = "login_fail";
 export const LOGIN_SUCCESS = "login_success";
 
-//reducer
 export const reducers = {
     [LOGIN_LOADING](state,payload){
         return state;
     }
 };
 
-//action
 export const actions = {
-    login(){
+    getList(){
         return async function(dispatch){
             dispatch({
                 type : LOGIN_LOADING,
@@ -39,6 +31,5 @@ export const actions = {
         }
     }
 }
-
 
 

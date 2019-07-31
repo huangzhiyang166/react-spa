@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import { connect } from "react-redux";
-import {login} from "@app/store/app";
+import { actions as appActions} from "@app/store/app";
 
 const Modal = () => new Promise((resolve,reject) => {
 
@@ -44,9 +44,14 @@ const Modal = () => new Promise((resolve,reject) => {
 
 
 
-function Home(props){
+
+
+
+export default connect((state)=>{
+    return state
+})((props) => {
     function onClick(e){
-        props.dispatch(login()).then((res) => {
+        props.dispatch(appActions.login()).then((res) => {
             console.log("finish",res);
         });
     }
@@ -55,10 +60,7 @@ function Home(props){
             ssssssss
         </div>
     )
-}
-
-
-export default connect((state)=>state)(Home)
+})
 
 
 
