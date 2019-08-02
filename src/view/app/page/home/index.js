@@ -1,11 +1,8 @@
 import React, { useState, useEffect }  from "react";
 import ReactDom from "react-dom";
 import { connect } from "react-redux";
-import {actions as globalActions,actionTypes as globalActionTypes} from "@app/store";
-const {app:actions} = globalActions;
-const {app:actionTypes} = globalActionTypes;
-console.log(actions);
-console.log(actionTypes);
+import {bindActionCreators} from "redux";
+import {actions as globalActions} from "@app/store";
 
 const Modal = () => new Promise((resolve,reject) => {
 
@@ -51,13 +48,18 @@ const Hello = (props) => {
 
 
 export default connect((state)=>{
-    console.log(state);
     return state
 })((props) => {
+    const actions = bindActionCreators(globalActions.app,props.dispatch);
+    function onClick(e){
+        actions.login().then((res) => {
+            console.log("res",res);
+        })
+    }
     return(
-        <div>
+        <div onClick={onClick}>
             aaaaaaaaaa
-                <Hello/>
+            <Hello/>
         </div>
     )
 })

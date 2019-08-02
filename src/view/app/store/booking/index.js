@@ -19,6 +19,9 @@ export const store = {
                 type : PROD_INFO_LOADING,
                 payload : !!loading
             }
+        },
+        getInfo(){
+            console.log(this);
         }
     }
 }
