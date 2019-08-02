@@ -16,11 +16,11 @@ const config = merge(baseWebpackConfig("production"),{
 		// 		sourceMap: false
 		// 	}),
 		// ],
+		runtimeChunk : "single",
         splitChunks: {
-            // （默认值3）入口点上的最大并行请求数
-			minChunks: 1,
+			// minChunks: 1,
 			// （默认值：30000）块的最小大小
-			minSize: 100,
+			minSize: 0,
 			// webpack 将使用块的起源和名称来生成名称: `vendors~main.js`,如项目与"~"冲突，则可通过此值修改，Eg: '-'
 			automaticNameDelimiter: '-',
 			// cacheGroups is an object where keys are the cache group names.

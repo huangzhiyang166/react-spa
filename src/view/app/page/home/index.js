@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 import ReactDom from "react-dom";
 import { connect } from "react-redux";
-import { actions as appActions} from "@app/store/app";
+import {actions as globalActions,actionTypes as globalActionTypes} from "@app/store";
+const {app:actions} = globalActions;
+const {app:actionTypes} = globalActionTypes;
+console.log(actions);
+console.log(actionTypes);
 
 const Modal = () => new Promise((resolve,reject) => {
 
@@ -41,23 +45,19 @@ const Modal = () => new Promise((resolve,reject) => {
 
 })
 
-
-
-
-
+const Hello = (props) => {
+    return <div>hello..</div>;
+}
 
 
 export default connect((state)=>{
+    console.log(state);
     return state
 })((props) => {
-    function onClick(e){
-        props.dispatch(appActions.login()).then((res) => {
-            console.log("finish",res);
-        });
-    }
     return(
-        <div onClick={onClick}>
-            ssssssss
+        <div>
+            aaaaaaaaaa
+                <Hello/>
         </div>
     )
 })

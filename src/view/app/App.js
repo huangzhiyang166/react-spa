@@ -2,6 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { hot } from "react-hot-loader";
 import Router from "@app/router";
+import ErrorBoundary from "@/component/ErrorBoundary";
 let App = (props) => {
     return (
         <Provider store={props.store}>

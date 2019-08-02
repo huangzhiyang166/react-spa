@@ -1,5 +1,5 @@
 
-import React from "react";
+import React,{Suspense} from "react";
 import {Switch} from "react-router-dom";
 import AuthLoginRoute from "@/component/auth-login-route";
 export default function MapRoute({routes,parentPath=""}){
